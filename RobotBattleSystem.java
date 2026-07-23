@@ -134,37 +134,69 @@ class ShadowBot extends Robot{
         System.out.println(getrobotName()+" Activated Invisible Mode ");
     }
 }
-public class RobotBattleSystem {
-    static void main(String[] args) {
-        Robot r1 = new BattleBot("DestroyerX", 100, 25, 50);
-        Robot r2 = new ThunderBot("ThunderZero", 120, 80, 40);
-        Robot r3 = new ShadowBot("GhostReaper", 90, 60, 35);
-        r1.attack();
-        r1.specialAbility();
-        r1.showStats();
+public static void main(String[] args) {
 
-        System.out.println();
+    ArrayList<String> battleHistory = new ArrayList<>();
 
-        r2.attack();
-        r2.specialAbility();
-        r2.showStats();
+    Robot r1 = new BattleBot("DestroyerX", 100, 25, 50);
+    Robot r2 = new ThunderBot("ThunderZero", 120, 80, 40);
+    Robot r3 = new ShadowBot("GhostReaper", 90, 60, 35);
 
-        System.out.println();
+    System.out.println("\n========== ROBOT BATTLE ==========");
 
-        r3.attack();
-        r3.specialAbility();
-        r3.showStats();
+    r1.attack();
+    battleHistory.add(r1.getrobotName() + " attacked using Missile Attack");
+    r1.specialAbility();
+    battleHistory.add(r1.getrobotName() + " activated Rage Mode");
+    r1.showStats();
 
-        System.out.println();
+    System.out.println();
 
-        BattleBot b1 = new BattleBot("Titan Warrior", 150, 70, 60);
-        b1.upgradeWeapon();
-        b1.upgradeArmor();
+    r2.attack();
+    battleHistory.add(r2.getrobotName() + " attacked using Electric Shock");
+    r2.specialAbility();
+    battleHistory.add(r2.getrobotName() + " activated EMP Blast");
+    r2.showStats();
 
-        System.out.println();
+    System.out.println();
 
-        ThunderBot t1 = new ThunderBot("Strom Breaker", 140, 75, 45);
-        t1.upgradeWeapon();
-        t1.upgradeArmor();
+    r3.attack();
+    battleHistory.add(r3.getrobotName() + " attacked using Stealth Attack");
+    r3.specialAbility();
+    battleHistory.add(r3.getrobotName() + " activated Invisible Mode");
+    r3.showStats();
+
+    System.out.println("\n========== BATTLE HISTORY ==========");
+
+    for(String event : battleHistory){
+        System.out.println(event);
     }
+
+    System.out.println("\n========== WINNER ==========");
+
+    Robot winner = r1;
+
+    if(r2.getHealth() > winner.getHealth()){
+        winner = r2;
+    }
+
+    if(r3.getHealth() > winner.getHealth()){
+        winner = r3;
+    }
+
+    System.out.println("🏆 Winner : " + winner.getrobotName());
+
+    System.out.println();
+
+    BattleBot b1 = new BattleBot("Titan Warrior", 150, 70, 60);
+    b1.upgradeWeapon();
+    b1.upgradeArmor();
+    b1.showStats();
+
+    System.out.println();
+
+    ThunderBot t1 = new ThunderBot("Storm Breaker", 140, 75, 45);
+    t1.upgradeWeapon();
+    t1.upgradeArmor();
+    t1.showStats();
 }
